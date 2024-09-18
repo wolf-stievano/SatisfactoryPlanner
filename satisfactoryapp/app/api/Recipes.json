@@ -1,0 +1,63 @@
+[
+	{
+		"name": "Iron Plate",
+		"inputs": {
+			"Iron Ingot": 3
+		},
+		"output": {
+			"Iron Plate": 2
+		},
+		"machine": "Constructor",
+		"base_production_rate": 20.0,
+		"time": 6.0
+	},
+	{
+		"name": "Reinforced Iron Plate",
+		"inputs": {
+			"Iron Plate": 6,
+			"Screw": 12
+		}, 
+		"output": {
+			"Reinforced Iron Plate": 1
+		},
+		"machine": "Assembler",
+		"base_production_rate": 5.0,
+		"time": 12.0
+	},
+	{
+		"name": "Iron Rod",
+		"inputs": {
+			"Iron Ingot": 1
+		},
+		"output": {
+			"Iron Rod": 1
+		},
+		"machine": "Constructor",
+		"base_production_rate": 15.0,
+		"time": 4.0
+	},
+	{
+		"name": "Screw",
+		"inputs": {
+			"Iron Rod": 10
+		},
+		"output": {
+			"Screw": 4
+		},
+		"machine": "Constructor",
+		"base_production_rate": 40.0,
+		"time": 6.0
+	},
+	{
+		"name": "Iron Ingot",
+		"inputs": {
+			"Iron Ore": 1
+		},
+		"output": {
+			"Iron Ingot": 1 
+		},
+		"machine": "Smelter",
+		"base_production_rate": 30.0,
+		"time": 2.0
+	}
+]
