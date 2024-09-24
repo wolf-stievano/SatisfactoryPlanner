@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
                                         transition={{ duration: 0.5 }}
                                         className="text-3xl font-bold"
                                 >
-                                        SensorHub
+                                        Satisfactory
                                 </motion.h1>
                                 <div className="flex items-center gap-5">
                                         <a
