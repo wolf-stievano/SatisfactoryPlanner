@@ -1,0 +1,48 @@
+{
+  "categories": [
+    {
+      "category": "Ores",
+      "inputs": [
+        { "name": "Iron Ore", "src": "/Iron_Ore.png" },
+	{ "name": "Copper Ore", "src": "/Copper_Ore.png" },
+	{ "name": "Limestone", "src": "/Limestone_Ore.png" },
+	{ "name": "Coal Ore", "src": "/Coal_Ore.png" },
+	{ "name": "Quartz Ore", "src": "/Raw_Quartz_Ore.png" },
+	{ "name": "Caterium Ore", "src": "/Caterium_Ore.png" },
+	{ "name": "Bauxite Ore", "src": "/Bauxite_Ore.png" },
+	{ "name": "Sulfur Ore", "src": "/Sulfur_Ore.png" },
+	{ "name": "Uranium Ore", "src": "/Uranium_Ore.png" },
+	{ "name": "SAM Ore", "src": "/SAM_Ore.png" }
+      ]
+    },
+    {
+      "category": "Ingots",
+      "inputs": [
+        { "name": "Iron Ingot", "src": "/Iron_Ingot.png" },
+	{ "name": "Copper Ingot", "src": "/Copper_Ingot.png" },
+	{ "name": "Steel Ingot", "src": "/Steel_Ingot.png" },
+	{ "name": "Aluminum Ingot", "src": "/Aluminum_Ingot.png" },
+	{ "name": "Caterium Ingot", "src": "/Caterium_Ingot.png" },
+	{ "name": "Ficsite Ingot", "src": "/Ficsite_Ingot.png" }
+      ]
+    },
+    {
+      "category": "Constructor Outputs",
+      "inputs": [
+
+        { "name": "Iron Plate", "src": "/Iron_Plate.png"},
+        { "name": "Iron Rod", "src": "/Iron_Rod.png"},
+        { "name": "Screw", "src": "/Screw.png"},
+        { "name": "Wire", "src": "/Wire.png"},
+        { "name": "Cable", "src": "/Cable.png"},
+        { "name": "Copper Sheet", "src": "/Copper_Sheet.png"},
+        { "name": "Concrete", "src": "/Concrete.png"},
+        { "name": "Quartz Crystal", "src": "/Quartz_Crystal.png"},
+        { "name": "Silica", "src": "/Silica.png"},
+        { "name": "Copper Powder", "src": "/Copper_Powder.png"},
+        { "name": "Steel Beam", "src": "/Steel_Beam.png"},
+        { "name": "Steel Pipe", "src": "/Steel_Pipe.png"}
+		]
+    }
+  ]
+}

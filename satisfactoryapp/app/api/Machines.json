@@ -6,6 +6,7 @@
 	},
 	{
 		"name": "Assembler",
+		"img": "/Assembler.png",
 		"power_usage": 15,
 		"default_efficiency": 1.0
 	},

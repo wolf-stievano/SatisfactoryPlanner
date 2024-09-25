@@ -1,20 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
         return (
                 <nav className="w-full p-6" style={{ backgroundColor: '#333333', color: 'white' }}>
                         <div className="flex justify-between items-center">
-                                <motion.h1
-                                        initial={{ opacity: 0, y: -20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5 }}
-                                        className="text-3xl font-bold"
-                                >
-                                        Satisfactory
-                                </motion.h1>
+                                <div className="w-1/4 max-w-[300px] h-auto relative">
+                                        <Image
+                                                src="/Title.png"
+                                                alt="Title Image"
+                                                layout="responsive"
+                                                width={300}
+                                                height={64}
+                                                objectFit="contain"
+                                        />
+                                </div>
                                 <div className="flex items-center gap-5">
+
                                         <a
                                                 className="font-medium text-white focus:outline-none hover:text-gray-300"
                                                 href="#"
