@@ -1,22 +1,22 @@
-import { useInputStore } from "@/app/api/inputStore";
+import { useOutputStore } from "@/app/api/outputStore";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import inputData from '../app/api/inputs.json';
 
-export default function InputDialog() {
-        const { addInput } = useInputStore();
+export default function OutputDialog() {
+        const { addOutput } = useOutputStore();
 
         return (
                 <Dialog>
                         <DialogTrigger asChild>
-                                <Button variant="outline">Add Input</Button>
+                                <Button variant="outline">Add Output</Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-4xl sm:max-h-[80vh] p-6 bg-primary overflow-y-auto">
                                 <DialogHeader>
-                                        <DialogTitle>Add Input</DialogTitle>
+                                        <DialogTitle>Add Output</DialogTitle>
                                         <DialogDescription>
-                                                Add your input of choice.
+                                                Add your output of choice.
                                         </DialogDescription>
                                 </DialogHeader>
 
@@ -29,7 +29,7 @@ export default function InputDialog() {
                                                                 <div
                                                                         key={i}
                                                                         className="flex flex-col items-center text-center cursor-pointer"
-                                                                        onClick={() => addInput(input)}  // Adiciona o input ao store
+                                                                        onClick={() => addOutput(input)}
                                                                 >
                                                                         <div className="border border-gray-300 rounded-md p-2">
                                                                                 <Image

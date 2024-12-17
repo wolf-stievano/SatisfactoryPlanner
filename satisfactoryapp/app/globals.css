@@ -90,3 +90,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.image-node {
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.image-node .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-node .text-container {
+  text-align: center;
+}
+
+.image-node p {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}

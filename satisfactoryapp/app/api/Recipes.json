@@ -1,63 +1,233 @@
 [
-	{
-		"name": "Iron Plate",
-		"inputs": {
-			"Iron Ingot": 3
-		},
-		"output": {
-			"Iron Plate": 2
-		},
-		"machine": "Constructor",
-		"base_production_rate": 20.0,
-		"time": 6.0
-	},
-	{
-		"name": "Reinforced Iron Plate",
-		"inputs": {
-			"Iron Plate": 6,
-			"Screw": 12
-		}, 
-		"output": {
-			"Reinforced Iron Plate": 1
-		},
-		"machine": "Assembler",
-		"base_production_rate": 5.0,
-		"time": 12.0
-	},
-	{
-		"name": "Iron Rod",
-		"inputs": {
-			"Iron Ingot": 1
-		},
-		"output": {
-			"Iron Rod": 1
-		},
-		"machine": "Constructor",
-		"base_production_rate": 15.0,
-		"time": 4.0
-	},
-	{
-		"name": "Screw",
-		"inputs": {
-			"Iron Rod": 10
-		},
-		"output": {
-			"Screw": 4
-		},
-		"machine": "Constructor",
-		"base_production_rate": 40.0,
-		"time": 6.0
-	},
-	{
-		"name": "Iron Ingot",
-		"inputs": {
-			"Iron Ore": 1
-		},
-		"output": {
-			"Iron Ingot": 1 
-		},
-		"machine": "Smelter",
-		"base_production_rate": 30.0,
-		"time": 2.0
-	}
+  {
+    "name": "Iron Plate",
+    "inputs": {
+      "Iron Ingot": 3
+    },
+    "output": {
+      "Iron Plate": 2
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 20.0,
+    "time": 6.0
+  },
+  {
+    "name": "Reinforced Iron Plate",
+    "inputs": {
+      "Iron Plate": 6,
+      "Screw": 12
+    },
+    "output": {
+      "Reinforced Iron Plate": 1
+    },
+    "machine": "Assembler",
+    "power": 15,
+    "base_production_rate": 5.0,
+    "time": 12.0
+  },
+  {
+    "name": "Iron Rod",
+    "inputs": {
+      "Iron Ingot": 1
+    },
+    "output": {
+      "Iron Rod": 1
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 15.0,
+    "time": 4.0
+  },
+  {
+    "name": "Screw",
+    "inputs": {
+      "Iron Rod": 1
+    },
+    "output": {
+      "Screw": 4
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 40.0,
+    "time": 6.0
+  },
+  {
+    "name": "Iron Ingot",
+    "inputs": {
+      "Iron Ore": 1
+    },
+    "output": {
+      "Iron Ingot": 1
+    },
+    "machine": "Smelter",
+    "power": 4,
+    "base_production_rate": 30.0,
+    "time": 2.0
+  },
+  {
+    "name": "Copper Ingot",
+    "inputs": {
+      "Copper Ore": 1
+    },
+    "output": {
+      "Copper Ingot": 1
+    },
+    "machine": "Smelter",
+    "power": 4,
+    "base_production_rate": 30.0,
+    "time": 2.0
+  },
+  {
+    "name": "Copper Sheet",
+    "inputs": {
+      "Copper Ingot": 2
+    },
+    "output": {
+      "Copper Sheet": 1
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 10.0,
+    "time": 6.0
+  },
+  {
+    "name": "Cable",
+    "inputs": {
+      "Wire": 2
+    },
+    "output": {
+      "Cable": 1
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 30.0,
+    "time": 2.0
+  },
+  {
+    "name": "Wire",
+    "inputs": {
+      "Copper Ingot": 1
+    },
+    "output": {
+      "Wire": 2
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 30.0,
+    "time": 4.0
+  },
+  {
+    "name": "Concrete",
+    "inputs": {
+      "Limestone": 3
+    },
+    "output": {
+      "Concrete": 1
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 15.0,
+    "time": 4.0
+  },
+  {
+    "name": "Caterium Ingot",
+    "inputs": {
+      "Caterium Ore": 3
+    },
+    "output": {
+      "Caterium Ingot": 1
+    },
+    "machine": "Smelter",
+    "power": 4,
+    "base_production_rate": 15.0,
+    "time": 4.0
+  },
+  {
+    "name": "Quickwire",
+    "inputs": {
+      "Caterium Ingot": 1
+    },
+    "output": {
+      "Quickwire": 5
+    },
+    "machine": "Constructor",
+    "power": 4,
+    "base_production_rate": 60.0,
+    "time": 5.0
+  },
+  {
+    "name": "Rotor",
+    "inputs": {
+      "Iron Rod": 5,
+      "Screw": 25
+    },
+    "output": {
+      "Rotor": 1
+    },
+    "machine": "Assembler",
+    "power": 15,
+    "base_production_rate": 4.0,
+    "time": 15.0
+  },
+  {
+    "name": "Heavy Oil Residue",
+    "inputs": {
+      "Crude Oil": 3
+    },
+    "output": {
+      "Heavy Oil Residue": 4,
+      "Polymer Resin": 2
+    },
+    "machine": "Refinery",
+    "power": 30,
+    "base_production_rate": {
+      "Heavy Oil Residue": 40,
+      "Polymer Resin": 20
+    },
+    "time": 6.0
+  },
+  {
+    "name": "Compacted Coal",
+
+    "inputs": {
+      "Coal": 5,
+      "Sulfur": 5
+    },
+    "output": {
+      "Compacted Coal": 5
+    },
+    "machine": "Assembler",
+    "power": 15,
+    "base_production_rate": 25.0,
+    "time": 12
+  },
+  {
+    "name": "Turbofuel",
+    "inputs": {
+      "Fuel": 6,
+      "Compacted Coal": 4
+    },
+    "output": {
+      "Turbofuel": 5
+    },
+    "machine": "Refinery",
+    "power": 30,
+    "base_production_rate": 18.75,
+    "time": 16
+  },
+  {
+    "name": "Fuel",
+    "inputs": {
+      "Heavy Oil Residue": 5,
+      "Water": 10
+    },
+    "output": {
+      "Fuel": 10
+    },
+    "machine": "Blender",
+    "power": 75,
+    "base_production_rate": 100.0,
+    "time": 6.0
+  }
 ]

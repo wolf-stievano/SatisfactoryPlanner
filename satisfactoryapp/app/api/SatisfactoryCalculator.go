@@ -15,42 +15,30 @@ type Recipe struct {
 	Inputs             map[string]float64 `json:"inputs"`
 	Output             map[string]float64 `json:"output"`
 	Machine            string             `json:"machine"`
+	Power              int                `json:"power" `
 	BaseProductionRate float64            `json:"base_production_rate"`
-	MaxProductionRate  float64            `json:"max_production_rate"`
 	Time               float64            `json:"time"`
 }
 
-type Machine struct {
-	Name              string  `json:"name"`
-	PowerUsage        int     `json:"power_usage"`
-	DefaultEfficiency float64 `json:"default_efficiency"`
-}
-
-func AdjustedEfficiency(recipe Recipe, machine Machine, outputRequired float64) float64 {
+func AdjustedEfficiency(recipe Recipe, outputRequired float64) float64 {
 	if outputRequired < recipe.BaseProductionRate {
 		return outputRequired / recipe.BaseProductionRate
 	}
-	return machine.DefaultEfficiency
+	return 1.0
 }
 
-func AdjustedProduction(recipe Recipe, machine Machine, outputRequired float64) (float64, float64) {
-	efficiency := AdjustedEfficiency(recipe, machine, outputRequired)
+func AdjustedProduction(recipe Recipe, outputRequired float64) (float64, float64) {
+	efficiency := AdjustedEfficiency(recipe, outputRequired)
 	adjustedProduction := recipe.BaseProductionRate * efficiency
 	return adjustedProduction, efficiency
 }
 
-func CalculateResourcesForProduction(recipes []Recipe, machines []Machine, outputRequired float64, product string) {
+func CalculateResourcesForProduction(recipes []Recipe, outputRequired float64, product string) {
+
 	for _, recipe := range recipes {
 		if _, exists := recipe.Output[product]; exists {
-			var machine Machine
-			for _, m := range machines {
-				if m.Name == recipe.Machine {
-					machine = m
-					break
-				}
-			}
 
-			adjustedProduction, efficiency := AdjustedProduction(recipe, machine, outputRequired)
+			adjustedProduction, efficiency := AdjustedProduction(recipe, outputRequired)
 
 			fmt.Printf("Para produzir %.2f %s por minuto, você precisará de:\n", adjustedProduction, product)
 			for input, quantity := range recipe.Inputs {
@@ -58,7 +46,7 @@ func CalculateResourcesForProduction(recipes []Recipe, machines []Machine, outpu
 				fmt.Printf("- %.2f unidades de %s\n", totalInput, input)
 			}
 
-			fmt.Printf("Você usará a máquina %s em %.2f%% de eficiência.\n", recipe.Machine, efficiency*100)
+			fmt.Printf("Você usará a máquina %s consumindo %d MW, com eficiência de %.2f%%.\n", recipe.Machine, recipe.Power, efficiency*100)
 			return
 		}
 	}
@@ -80,27 +68,8 @@ func LoadRecipes(filename string) ([]Recipe, error) {
 	return recipes, nil
 }
 
-func LoadMachines(filename string) ([]Machine, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var machines []Machine
-	err = json.NewDecoder(file).Decode(&machines)
-	if err != nil {
-		return nil, err
-	}
-	return machines, nil
-}
-
 func main() {
 	recipes, err := LoadRecipes("Recipes.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-	machines, err := LoadMachines("Machines.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -121,5 +90,5 @@ func main() {
 		return
 	}
 
-	CalculateResourcesForProduction(recipes, machines, outputRequired, product)
+	CalculateResourcesForProduction(recipes, outputRequired, product)
 }

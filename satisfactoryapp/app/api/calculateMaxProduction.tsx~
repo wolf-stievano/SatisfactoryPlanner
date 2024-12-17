@@ -1,0 +1,119 @@
+import { Recipe, DependencyNode, InputItem } from '../api/types'
+import recipesData from '../api/Recipes.json';
+import { getItemImage, getMachineImage } from './getImage';
+
+function findRecipesByOutput(itemName: string): Recipe[] {
+        return recipesData.filter((recipe) =>
+                Object.keys(recipe.output).includes(itemName)
+        );
+}
+
+export function calculateMaxProduction(
+        outputItemName: string,
+        selectedInputs: InputItem[],
+        parentNodeId: string = '',
+        processedNodes: Map<string, DependencyNode> = new Map()
+): DependencyNode {
+        const nodeId = `${parentNodeId}-${outputItemName}`;
+
+        if (processedNodes.has(nodeId)) {
+                return processedNodes.get(nodeId)!;
+        }
+
+        // Se o outputItemName estiver nos selectedInputs, retornamos a quantidade disponível
+        const inputItem = selectedInputs.find(input => input.name === outputItemName);
+        if (inputItem) {
+                const node: DependencyNode = {
+                        id: nodeId,
+                        name: outputItemName,
+                        machine: 'Input',
+                        quantity: 0,
+                        itemQuantity: inputItem.quantity,
+                        imageSrc: getItemImage(outputItemName),
+                        children: [],
+                        requiredPerMinute: inputItem.quantity,
+                };
+                processedNodes.set(nodeId, node);
+                return node;
+        }
+
+        // Encontrar as receitas que produzem o outputItemName
+        const recipes = findRecipesByOutput(outputItemName);
+
+        if (!recipes || recipes.length === 0) {
+                // Não podemos produzir este item
+                const node: DependencyNode = {
+                        id: nodeId,
+                        name: outputItemName,
+                        machine: 'Cannot Produce',
+                        quantity: 0,
+                        itemQuantity: 0,
+                        imageSrc: getItemImage(outputItemName),
+                        children: [],
+                        requiredPerMinute: 0,
+                };
+                processedNodes.set(nodeId, node);
+                return node;
+        }
+
+        // Para simplificar, selecionamos a primeira receita
+        const recipe = recipes[0];
+
+        // Obter a quantidade de output por craft
+        const outputQuantityPerCraft = recipe.output[outputItemName];
+
+        if (outputQuantityPerCraft === undefined) {
+                throw new Error(`Quantidade de output '${outputItemName}' é undefined na receita '${recipe.name}'.`);
+        }
+
+        // Calcular outputPerMinute
+        const outputPerMinute = (outputQuantityPerCraft / recipe.time) * 60;
+
+        // Percorrer os inputs da receita
+        const children: DependencyNode[] = [];
+        let maxOutputPerMinute = Infinity;
+
+        for (const inputName in recipe.inputs) {
+                const inputQuantityPerCraft = recipe.inputs[inputName];
+
+                if (inputQuantityPerCraft === undefined) {
+                        throw new Error(`Quantidade de input '${inputName}' é undefined na receita '${recipe.name}'.`);
+                }
+
+                // Calcular inputPerMinute
+                const inputPerMinute = (inputQuantityPerCraft / recipe.time) * 60;
+
+                // Calcular a quantidade máxima de output possível com base na disponibilidade do input
+                const inputNode = calculateMaxProduction(
+                        inputName,
+                        selectedInputs,
+                        nodeId,
+                        processedNodes
+                );
+                children.push(inputNode);
+
+                const availableInput = inputNode.itemQuantity;
+
+                const possibleOutputPerMinute = (availableInput * outputPerMinute) / inputPerMinute;
+
+                maxOutputPerMinute = Math.min(maxOutputPerMinute, possibleOutputPerMinute);
+        }
+
+        // Quantidade de máquinas necessárias
+        const machinesNeeded = maxOutputPerMinute / outputPerMinute;
+
+        // Criar o nó
+        const node: DependencyNode = {
+                id: nodeId,
+                name: outputItemName,
+                machine: recipe.machine,
+                quantity: machinesNeeded,
+                itemQuantity: maxOutputPerMinute,
+                imageSrc: getMachineImage(recipe.machine),
+                children: children,
+                requiredPerMinute: maxOutputPerMinute,
+        };
+        processedNodes.set(nodeId, node);
+
+        return node;
+}

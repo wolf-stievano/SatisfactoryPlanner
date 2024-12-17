@@ -5,7 +5,7 @@
       "inputs": [
         { "name": "Iron Ore", "src": "/Iron_Ore.png" },
 	{ "name": "Copper Ore", "src": "/Copper_Ore.png" },
-	{ "name": "Limestone", "src": "/Limestone_Ore.png" },
+	{ "name": "Limestone", "src": "/Limestone.png" },
 	{ "name": "Coal Ore", "src": "/Coal_Ore.png" },
 	{ "name": "Quartz Ore", "src": "/Raw_Quartz_Ore.png" },
 	{ "name": "Caterium Ore", "src": "/Caterium_Ore.png" },
@@ -43,6 +43,29 @@
         { "name": "Steel Beam", "src": "/Steel_Beam.png"},
         { "name": "Steel Pipe", "src": "/Steel_Pipe.png"}
 		]
+    },
+    {
+    "category": "Assembler Outputs",
+    "inputs": [
+	{ "name": "Reinforced Iron Plate", "src": "/Reinforced_Iron_Plate.png"},
+	{ "name": "Rotor", "src": "/Rotor.png"},
+	{ "name": "Compacted Coal", "src": "/Compacted_Coal.png"}
+      ]
+  },
+  {
+      "category": "Fluids",
+      "inputs": [
+	{ "name": "Crude Oil", "src": "/Crude_Oil.png" },
+	{ "name": "Water", "src": "/Water.png" }
+      ]
+  },
+  {
+      "category": "Refinery Outputs",
+      "inputs": [
+	{ "name": "Heavy Oil Residue", "src": "/Heavy_Oil_Residue.png" },
+	{ "name": "Fuel", "src": "/Fuel.png" },
+	{ "name": "Turbofuel", "src": "/Turbofuel.png" }
+      ]
     }
   ]
 }

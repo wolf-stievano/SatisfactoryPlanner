@@ -1,39 +1,10 @@
-import { useState } from "react"
-import InputDialog from "./InputDialog"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card"
-import Image from "next/image"
-
-interface InputItem {
-        name: string;
-        src: string;
-        quantity: number;
-}
+import { useInputStore } from "@/app/api/inputStore";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";
+import Image from "next/image";
+import InputDialog from "./InputDialog";
 
 export default function InputCard() {
-        const [selectedInputs, setSelectedInputs] = useState<InputItem[]>([]);
-
-        const handleSelectInput = (input: Omit<InputItem, 'quantity'>) => {
-                const existingInputIndex = selectedInputs.findIndex((item) => item.name === input.name);
-
-                if (existingInputIndex !== -1) {
-                        const updatedInputs = [...selectedInputs];
-                        updatedInputs[existingInputIndex].quantity += 1;
-                        setSelectedInputs(updatedInputs);
-                } else {
-                        setSelectedInputs([...selectedInputs, { ...input, quantity: 1 }]);
-                }
-        };
-
-        const handleQuantityChange = (index: number, newQuantity: string) => {
-                const updatedInputs = [...selectedInputs];
-                updatedInputs[index].quantity = parseInt(newQuantity, 10);
-                setSelectedInputs(updatedInputs);
-        };
-
-        const handleDeleteInput = (index: number) => {
-                const updatedInputs = selectedInputs.filter((_, i) => i !== index);
-                setSelectedInputs(updatedInputs);
-        };
+        const { selectedInputs, updateQuantity, removeInput } = useInputStore();
 
         return (
                 <Card className="w-full h-full shadow-lg p-6 flex-col rounded-none rounded-b-lg">
@@ -42,7 +13,7 @@ export default function InputCard() {
                                 <CardDescription>Todas opções de input</CardDescription>
                         </CardHeader>
                         <CardContent className="flex-grow">
-                                <InputDialog onSelectInput={handleSelectInput} />
+                                <InputDialog />
 
                                 {selectedInputs.length > 0 && (
                                         <div className="mt-4">
@@ -56,12 +27,12 @@ export default function InputCard() {
                                                                         type="number"
                                                                         value={input.quantity}
                                                                         min="1"
-                                                                        onChange={(e) => handleQuantityChange(index, e.target.value)}
+                                                                        onChange={(e) => updateQuantity(index, parseInt(e.target.value, 10))}
                                                                         className="w-20 border rounded p-1 text-black"
                                                                 />
                                                                 <button
                                                                         className="ml-4 text-red-500 hover:text-red-700"
-                                                                        onClick={() => handleDeleteInput(index)}
+                                                                        onClick={() => removeInput(index)}
                                                                 >
                                                                         Deletar
                                                                 </button>
@@ -71,5 +42,5 @@ export default function InputCard() {
                                 )}
                         </CardContent>
                 </Card>
-        )
+        );
 }
